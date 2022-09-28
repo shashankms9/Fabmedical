@@ -2,15 +2,27 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    deployment.kubernetes.io/revision: "2"
-  creationTimestamp: "2022-09-28T07:28:03Z"
-  generation: 5
+    branch: refs/heads/main
+    commit: 4f2e028e08c4384c7e1ddf7ebf551f4f4c745f21
+    createdBy: shashankms9
+    deployTimestamp: "1664360035837"
+    deployment.kubernetes.io/revision: "1"
+    jobName: build-and-publish-docker-image
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"api"},"name":"api","namespace":"ingress-demo"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"api"}},"strategy":{"rollingUpdate":{"maxSurge":1,"maxUnavailable":1},"type":"RollingUpdate"},"template":{"metadata":{"labels":{"app":"api"},"name":"api"},"spec":{"containers":[{"env":[{"name":"MONGODB_CONNECTION","valueFrom":{"secretKeyRef":{"key":"db","name":"cosmosdb"}}}],"image":"fabmedical750984.azurecr.io/content-api","imagePullPolicy":"Always","livenessProbe":{"failureThreshold":3,"httpGet":{"path":"/","port":3001},"initialDelaySeconds":30,"periodSeconds":20,"timeoutSeconds":10},"name":"api","ports":[{"containerPort":3001,"hostPort":3001,"protocol":"TCP"}],"resources":{"requests":{"cpu":"1000m","memory":"128Mi"}},"securityContext":{"privileged":false},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File"}],"dnsPolicy":"ClusterFirst","imagePullSecrets":[{"name":"ingress-demo-secret"}],"restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30}}}}
+    provider: GitHub
+    repository: shashankms9/Fabmedical
+    run: "3142680826"
+    runUri: https://github.com/shashankms9/Fabmedical/actions/runs/3142680826
+    workflow: content-api
+  creationTimestamp: "2022-09-28T10:13:58Z"
+  generation: 2
   labels:
     app: api
   name: api
   namespace: ingress-demo
-  resourceVersion: "29218"
-  uid: a7adc123-8163-4c9c-87bf-2a823157ed53
+  resourceVersion: "60266"
+  uid: 6bef1b66-f0aa-401a-a7d9-88e5dd95e2f4
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
@@ -52,16 +64,19 @@ spec:
         name: api
         ports:
         - containerPort: 3001
+          hostPort: 3001
           protocol: TCP
         resources:
           requests:
-            cpu: 100m
+            cpu: "1"
             memory: 128Mi
         securityContext:
           privileged: false
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: ingress-demo-secret
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
@@ -69,19 +84,19 @@ spec:
 status:
   availableReplicas: 1
   conditions:
-  - lastTransitionTime: "2022-09-28T07:28:03Z"
-    lastUpdateTime: "2022-09-28T07:43:24Z"
-    message: ReplicaSet "api-5c69b8fbb" has successfully progressed.
-    reason: NewReplicaSetAvailable
-    status: "True"
-    type: Progressing
-  - lastTransitionTime: "2022-09-28T07:58:14Z"
-    lastUpdateTime: "2022-09-28T07:58:14Z"
+  - lastTransitionTime: "2022-09-28T10:13:59Z"
+    lastUpdateTime: "2022-09-28T10:13:59Z"
     message: Deployment has minimum availability.
     reason: MinimumReplicasAvailable
     status: "True"
     type: Available
-  observedGeneration: 5
+  - lastTransitionTime: "2022-09-28T10:13:59Z"
+    lastUpdateTime: "2022-09-28T10:14:07Z"
+    message: ReplicaSet "api-5dd488c49c" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 2
   readyReplicas: 1
   replicas: 1
   updatedReplicas: 1

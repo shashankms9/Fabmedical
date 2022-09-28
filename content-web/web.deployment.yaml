@@ -5,14 +5,14 @@ metadata:
     deployment.kubernetes.io/revision: "2"
     kubectl.kubernetes.io/last-applied-configuration: |
       {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"web"},"name":"web","namespace":"ingress-demo"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"web"}},"strategy":{"rollingUpdate":{"maxSurge":1,"maxUnavailable":1},"type":"RollingUpdate"},"template":{"metadata":{"labels":{"app":"web"},"name":"web"},"spec":{"containers":[{"env":[{"name":"CONTENT_API_URL","value":"http://api:3001"}],"image":"fabmedical750984.azurecr.io/content-web","imagePullPolicy":"Always","livenessProbe":{"failureThreshold":3,"httpGet":{"path":"/","port":3000},"initialDelaySeconds":30,"periodSeconds":20,"timeoutSeconds":10},"name":"web","ports":[{"containerPort":3000,"hostPort":80,"protocol":"TCP"}],"resources":{"requests":{"cpu":"1000m","memory":"128Mi"}},"securityContext":{"privileged":false},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File"}],"dnsPolicy":"ClusterFirst","restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30}}}}
-  creationTimestamp: "2022-09-28T07:30:55Z"
-  generation: 3
+  creationTimestamp: "2022-09-28T11:00:19Z"
+  generation: 2
   labels:
     app: web
   name: web
   namespace: ingress-demo
-  resourceVersion: "56559"
-  uid: d91f95ba-da94-488a-a97f-64e174855a30
+  resourceVersion: "72259"
+  uid: b69a6a6b-b18b-4c06-b516-80ea00182aeb
 spec:
   progressDeadlineSeconds: 600
   replicas: 4
@@ -51,7 +51,6 @@ spec:
         name: web
         ports:
         - containerPort: 3000
-          hostPort: 80
           protocol: TCP
         resources:
           requests:
@@ -67,22 +66,21 @@ spec:
       securityContext: {}
       terminationGracePeriodSeconds: 30
 status:
-  availableReplicas: 3
+  availableReplicas: 4
   conditions:
-  - lastTransitionTime: "2022-09-28T09:57:51Z"
-    lastUpdateTime: "2022-09-28T09:57:51Z"
+  - lastTransitionTime: "2022-09-28T11:05:49Z"
+    lastUpdateTime: "2022-09-28T11:05:49Z"
     message: Deployment has minimum availability.
     reason: MinimumReplicasAvailable
     status: "True"
     type: Available
-  - lastTransitionTime: "2022-09-28T07:30:55Z"
-    lastUpdateTime: "2022-09-28T09:58:29Z"
-    message: ReplicaSet "web-5c747454d6" is progressing.
-    reason: ReplicaSetUpdated
+  - lastTransitionTime: "2022-09-28T11:00:19Z"
+    lastUpdateTime: "2022-09-28T11:05:57Z"
+    message: ReplicaSet "web-699858cc98" has successfully progressed.
+    reason: NewReplicaSetAvailable
     status: "True"
     type: Progressing
-  observedGeneration: 3
-  readyReplicas: 3
-  replicas: 5
-  unavailableReplicas: 2
-  updatedReplicas: 2
+  observedGeneration: 2
+  readyReplicas: 4
+  replicas: 4
+  updatedReplicas: 4
